@@ -95,3 +95,4 @@ dist/
 bower_components/
 cover/
 .noseids
+/statics-assets/

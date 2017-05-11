@@ -5,9 +5,10 @@ services:
       context: .
       dockerfile: devel.dockerfile
     volumes:
-      - "./src/apof/:/run/service/src/apof"
-      - "./media:/run/service/media"
-      - "./fron/dist:/run/service/statics"
+      - "./src/apof/:/opt/apof/src/apof"
+      - "./media:/opt/apof/media"
+      - "./fron/dist:/opt/apof/statics"
+      - "./statics-assets:/opt/apof/static-assets/"
     ports:
       - "8000:8000"
     depends_on:
@@ -23,9 +24,20 @@ services:
   nginx:
     image: nginx
     ports:
-      - "84:84"
+      - "80:80"
     volumes:
       - "./nginx:/etc/nginx/conf.d"
       - "./media:/var/media"
+      - "./statics-assets:/opt/apof/statics-assets/"
     depends_on:
       - web
+  fron:
+    build:
+      context: fron
+      dockerfile: devel.dockerfile
+    volumes:
+      - "./fron/src/:/opt/apof/fron/src"
+      - "./fron/dist:/opt/apof/fron/dist"
+      - "./fron/bower.json:/opt/apof/fron/bower.json"
+      - "./fron/gulpfile.js:/opt/apof/fron/src/gulpfile.js"
+      - "./fron/package.json:/opt/apof/fron/src/package.json"

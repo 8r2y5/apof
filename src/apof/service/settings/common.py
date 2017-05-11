@@ -164,9 +164,11 @@ USE_TZ = True
 STATICFILES_DIRS = [
     os.path.realpath(os.path.join(BASE_DIR, '..', '..', '..', 'statics'))
 ]
-
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.abspath(os.path.join(BASE_DIR, '..', '..', '..', 'static'))
+SRC_DIR = os.path.realpath(os.path.join(BASE_DIR, '..',))
+PROJECT_DIR = os.path.realpath(os.path.join(SRC_DIR, '..'))
+
+STATIC_ROOT = os.path.join(PROJECT_DIR, '..', 'static-assets')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.abspath(os.path.join(BASE_DIR, '..', '..', '..', 'media'))

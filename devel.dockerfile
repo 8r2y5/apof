@@ -1,13 +1,13 @@
 FROM python:2.7
 ENV PYTHONUNBUFFERED 1
 
-RUN mkdir /run/service
-ADD . /run/service
-WORKDIR /run/service
+RUN mkdir /opt/apof/
+ADD . /opt/apof/
+WORKDIR /opt/apof/
 
 RUN pip install -U pip
 RUN pip install -I -e .[develop] --process-dependency-links
 
-WORKDIR /run/service/src/apof
+WORKDIR /opt/apof/src/apof
 ENTRYPOINT ["apofcmd"]
 CMD ["django","runserver","0.0.0.0:8000"]
